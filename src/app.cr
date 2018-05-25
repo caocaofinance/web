@@ -1,6 +1,6 @@
 require "kemal"
 
-#Kemal.config.port=80
+Kemal.config.port=80
 
 get "/" do
   title="曹操"
