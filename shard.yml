@@ -1,0 +1,17 @@
+name: caocao
+version: 0.1.0
+
+authors:
+  - sushitoken <sushitoken@yandex.com>
+
+targets:
+  caocao:
+    main: src/caocao.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+crystal: 0.24.2
+
+license: MIT
