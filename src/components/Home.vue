@@ -5,6 +5,10 @@
     <router-link to="/about">
       about
     </router-link>
+    
+    <router-link to="/hash">
+      hash
+    </router-link>
   </div>
 </template>
 
