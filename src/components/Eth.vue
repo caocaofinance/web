@@ -3,8 +3,6 @@
     hash
     <h1>{{ msg }}</h1>
     <p>mnemonic:{{ mnemonic }}</p>
-    <p>seedHex:{{ seedHex }}</p>
-    <p>rootkey:{{ rootkey }}</p>
     <p>privateKey:{{ privateKey }}</p>
     <button v-on:click="make">make</button>
 
@@ -32,10 +30,7 @@ export default {
       msg: '',
       title:'',
       mnemonic:'',
-      seedHex:'',
-      rootkey:'',
       privateKey:'',
-      publicKey:'',
       address:'',
       items:[]
     }
@@ -56,25 +51,33 @@ export default {
         //2、将 mnemonic code 转成 binary 的 seed
         let seed = bip39.mnemonicToSeed(mnemonic);
 
+        /* 
         let seedHex = bip39.mnemonicToSeedHex(mnemonic);
+        */
+        
 
-        this.seedHex=seedHex;
-
-        //3、使用 seed 产生 HD Wallet。如果要说更明确，就是产生 Master Key 并记录起来。
+        //3、使用 seed 产生 HD Wallet(Master Key)
         let hdWallet = hdkey.fromMasterSeed(seed);
 
-        this.rootkey=hdWallet;
+        //4、获得 BIP32 Root Key
+        this.rootkey=hdWallet._hdkey.privateExtendedKey;
         
-        //4、产生第一个 Ethereum Address
-        let key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
+        //5、产生第一个Ethereum Address
+        
+        //let key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
+        let key1 = hdWallet.derivePath("m/44'/60'/0'/0");
 
-        //5、使用 keypair 中的公钥产生 address。
+        //6、 私钥，可以倒入imtoken钱包。
+        this.privateKey=key1._hdkey._privateKey.toString('hex');
+    
+
+        //7、使用 keypair 中的公钥产生 address。
         let address1 = util.pubToAddress(key1._hdkey._publicKey, true);
 
-        //6、用 EIP55: Mixed-case checksum address encoding 再进行编码
+        //8、用 EIP55: Mixed-case checksum address encoding 再进行编码，得到收款地址。
         address1 = util.toChecksumAddress(address1.toString('hex'));
-        //this.privateKey=privateKey;
         this.address=address1;
+
       },
       onCopy: function (e) {
         alert('You just copied: ' + e.text)
