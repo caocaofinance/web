@@ -13,6 +13,10 @@
     <router-link to="/bip39">
       bip39
     </router-link>
+
+    <router-link to="/eth">
+      eth
+    </router-link>
   </div>
 </template>
 

@@ -3,6 +3,8 @@
     hash
     <h1>{{ msg }}</h1>
     <p>mnemonic:{{ mnemonic }}</p>
+    <p>seedHex:{{ seedHex }}</p>
+    <p>rootkey:{{ rootkey }}</p>
     <p>privateKey:{{ privateKey }}</p>
     <button v-on:click="make">make</button>
 
@@ -33,6 +35,8 @@ export default {
       msg: '',
       title:'',
       mnemonic:'',
+      seedHex:'',
+      rootkey:'',
       privateKey:'',
       publicKey:'',
       address:'',
@@ -57,15 +61,21 @@ export default {
 
         //2、该助记词使用 PBKDF2 转化为种子:
         let seedHex = bip39.mnemonicToSeedHex(words);
+
+        this.seedHex=seedHex;
         //let seedHex = bip39.mnemonicToSeedHex(words, password);
  
 
         // 种子用于使用 HMAC-SHA512 生成根私钥:
         let root = bitcoin.HDNode.fromSeedHex(seedHex);
         const rootPrv=root.toBase58();
+
+        //BIP32 Root Key
+        this.rootkey=rootPrv;
         const rootPub=root.neutered().toBase58();
 
 
+        //bip44
         // 从该根私钥，导出子私钥（参见 BIP32），其中节点布局由BIP44设置，生成派生key:
         let child0 = root.derivePath("m/44'/60'/0'/0");
         const privateKey=child0.keyPair.toWIF();
