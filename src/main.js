@@ -4,14 +4,17 @@ import VueRouter from 'vue-router'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 import Hash from './components/Hash.vue'
-
+import Bip39 from './components/Bip39.vue'
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
-  { path: '/hash', component: Hash }
+  { path: '/hash', component: Hash },
+  { path: '/bip39', component: Bip39 }
 ]
 
 const router = new VueRouter({

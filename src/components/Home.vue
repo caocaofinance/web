@@ -5,9 +5,13 @@
     <router-link to="/about">
       about
     </router-link>
-    
+
     <router-link to="/hash">
       hash
+    </router-link>
+
+    <router-link to="/bip39">
+      bip39
     </router-link>
   </div>
 </template>
