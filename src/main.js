@@ -6,6 +6,7 @@ import About from './components/About.vue'
 import Hash from './components/Hash.vue'
 import Bip39 from './components/Bip39.vue'
 import Eth from './components/Eth.vue'
+import First from './components/First.vue'
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
@@ -16,7 +17,8 @@ const routes = [
   { path: '/about', component: About },
   { path: '/hash', component: Hash },
   { path: '/bip39', component: Bip39 },
-  { path: '/eth', component: Eth }
+  { path: '/eth', component: Eth },
+  { path: '/first', component: First }
 ]
 
 const router = new VueRouter({

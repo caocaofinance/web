@@ -17,6 +17,10 @@
     <router-link to="/eth">
       eth
     </router-link>
+
+    <router-link to="/first">
+      first
+    </router-link>
   </div>
 </template>
 
