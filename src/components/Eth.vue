@@ -62,6 +62,8 @@ export default {
 
         //3、使用 seed 产生 HD Wallet。如果要说更明确，就是产生 Master Key 并记录起来。
         let hdWallet = hdkey.fromMasterSeed(seed);
+
+        this.rootkey=hdWallet;
         
         //4、产生第一个 Ethereum Address
         let key1 = hdWallet.derivePath("m/44'/60'/0'/0/0");
