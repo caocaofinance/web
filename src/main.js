@@ -7,7 +7,21 @@ import Hash from './components/Hash.vue'
 import Bip39 from './components/Bip39.vue'
 import Eth from './components/Eth.vue'
 import First from './components/First.vue'
+import Profile from './components/Profile.vue'
+
 import VueClipboard from 'vue-clipboard2'
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.min.css';
+
+
+import WeVue from 'we-vue'
+import 'we-vue/lib/style.css'
+Vue.use(WeVue)
+
+import { Icon } from 'we-vue'
+Vue.use(Icon)
+
+Vue.use(Mint);
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
@@ -18,7 +32,8 @@ const routes = [
   { path: '/hash', component: Hash },
   { path: '/bip39', component: Bip39 },
   { path: '/eth', component: Eth },
-  { path: '/first', component: First }
+  { path: '/first', component: First },
+  { path: '/profile', component: Profile }
 ]
 
 const router = new VueRouter({
