@@ -9,7 +9,8 @@ import Bip39 from './components/Bip39.vue'
 import Eth from './components/Eth.vue'
 import First from './components/First.vue'
 import Profile from './components/Profile.vue'
-
+import Notfound from './components/404.vue'
+import Update from './components/Update.vue'
 import VueClipboard from 'vue-clipboard2'
 
 import MuseUI from 'muse-ui';
@@ -17,8 +18,7 @@ import css from 'muse-ui/dist/muse-ui.css';
 Vue.use(MuseUI);
 
 import MintUI from 'mint-ui'
-
-
+import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
 import VueResource from 'vue-resource';
@@ -36,6 +36,8 @@ Vue.http.options.emulateHTTP
 const routes = [
   { path: '/', component: Home },
   { path: '/view/:id', component: View },
+  { path: '/update', component: Update },
+  { path: '/*', component: Notfound },
 ]
 
 const router = new VueRouter({

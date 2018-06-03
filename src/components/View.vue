@@ -4,14 +4,14 @@
       <mu-button @click="gohome" icon slot="left">
         <mu-icon value="keyboard_arrow_left"></mu-icon>
       </mu-button>
-      {{article.title}}
+      文章详情
     </mu-appbar>
     <mu-card-media :title="article.title" :sub-title="article.time">
-      <img src="http://www.muse-ui.org/static/img/sun.a646a52.jpg">
+      <img :src="article.image">
     </mu-card-media>
-     <mu-card-header :title="article.author" sub-title="曹操财经创始人">
+     <mu-card-header :title="article.author" :sub-title="article.bio">
     <mu-avatar slot="avatar">
-      <img src="../assets/logo.png">
+      <img :src="article.avatar">
     </mu-avatar>
     </mu-card-header>
     <mu-card-text>
@@ -22,6 +22,7 @@
 
 <script>
 import { Toast } from 'mint-ui';
+import { MessageBox } from 'mint-ui';
 export default {
   name: 'Home',
   props: {
@@ -30,10 +31,12 @@ export default {
   data () {
     return {
         article:{
-        id:'',
-      selected:'',
-      thumb:'../assets/user.png',
-      description:'hahaha',
+            title:'',
+            time:'',
+            image:'',
+            avatar:'',
+            time:'',
+            text:''
         },
     }
   },
@@ -45,15 +48,19 @@ export default {
         this.$router.push('/');
     }
   },mounted(){
-    this.selected=0;
     var id=this.$route.params.id;
     this.$http.get('https://raw.githubusercontent.com/caocaofinance/json/master/'+id+'.json').then(response => {
-  
       // get body data
       this.article = response.body;
     }, response => {
       // error callback
-        Toast('文章不存在！');
+        MessageBox({
+            title: '文章不存在！',
+            message: '或可能网络原因',
+            showCancelButton: false
+        }).then(action => {
+            this.$router.push('/');
+        });
     });
   }
 }
