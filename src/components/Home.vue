@@ -1,34 +1,18 @@
 <template>
-  <div class="hello">
-    home
-    <mt-button @click.native="handleClick">Button</mt-button>
-    <h1>{{ selected }}</h1>
-    <wv-panel title="文字组合列表">
-      <wv-media-box :thumb="thumb" title="标题一" :description="description" to="/" type="text"></wv-media-box>
-      <wv-media-box :thumb="thumb" title="标题二" :description="description" to="/" type="text"></wv-media-box>
-
-      <wv-cell title="查看更多" is-link slot="ft"></wv-cell>
-    </wv-panel>
-    <wv-tabbar>
-    <wv-tabbar-item to="/news">
-      <img class="weui-tabbar__icon" src="../assets/flash.png" slot="icon"> 快讯
-    </wv-tabbar-item>
-    <wv-tabbar-item to="/msg">
-      <span slot="icon" style="display: inline-block; position: relative;">
-        <img class="weui-tabbar__icon" src="../assets/msg.png" slot="icon">
-        <wv-badge is-dot style="position: absolute;top: 0;right: -6px;">8</wv-badge>
-      </span>
-       消息
-    </wv-tabbar-item>
-    <wv-tabbar-item to="/profile">
-      <img class="weui-tabbar__icon" src="../assets/user.png" slot="icon"> 我
-    </wv-tabbar-item>
-  </wv-tabbar>
-  </div>
+  <mu-grid-list class="gridlist">
+        <mu-sub-header>最新文章</mu-sub-header>
+        <mu-grid-tile @click="view(index)" v-for="tile, index in list" :key="index">
+          <img :src="tile.image" >
+          <span slot="title">{{tile.title}}</span>
+          <span slot="subTitle">by <b>{{tile.author}}</b></span>
+        </mu-grid-tile>
+      </mu-grid-list>
 </template>
 
 <script>
-
+import List from './List.vue'
+import Msg from './Msg.vue'
+import Profile from './Profile.vue'
 export default {
   name: 'Home',
   props: {
@@ -36,16 +20,37 @@ export default {
   },
   data () {
     return {
-      selected:'',
+      list:[
+        {
+          id:'59',
+          title:'最好的风景，总是在脚下',
+          image:'http://www.muse-ui.org/static/img/sun.a646a52.jpg',
+          author:'caocao'
+        }
+      ],
       thumb:'../assets/user.png',
-      description:'hahaha'
+      description:'hahaha',
+      component:[List,Msg,Profile]
     }
   },
   methods: {
-        handleClick: function() {
-          this.$toast('Hello world!')
-        }
-      }
+    handleClick: function() {
+      this.$toast('Hello world!')
+    },
+    view(index){
+      console.log(this.list[index]);
+      this.$router.push('/view/'+this.list[index].id);
+    }
+  },mounted(){
+    this.selected=0;
+    this.$http.get('https://raw.githubusercontent.com/caocaofinance/json/master/list.json').then(response => {
+  
+      // get body data
+      this.list = response.body;
+    }, response => {
+      // error callback
+    });
+  }
 }
 </script>
 

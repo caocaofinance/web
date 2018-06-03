@@ -1,40 +1,15 @@
 <template>
   <div class="hello">
-    <wv-header title="profile" @headerClick="onHeaderClick" :fixed="true" background-color="#2196f3">
-        <div class="btn-back" slot="left">
-            <i class="iconfont icon-back" @click="$router.push('/')"></i>
-        </div>
-        <div class="btn-menu" slot="right">
-            <i class="iconfont icon-menu" @click="$router.push('/')"></i>
-        </div>
-    </wv-header>
-    
-    <mt-button @click.native="handleClick">Button</mt-button>
-    <router-link to="/about">
-      about
-    </router-link>
-
-    <router-link to="/hash">
-      hash
-    </router-link>
-
-    <router-link to="/bip39">
-      bip39
-    </router-link>
-
-    <router-link to="/eth">
-      eth
-    </router-link>
-
-    <router-link to="/first">
-      first
-    </router-link>
-    <wv-footer class="footer-demo" text="Copyright © 2017 wevue.org"></wv-footer>
+    <mt-header fixed title="我">
+        <router-link to="/" slot="left">
+            <mt-button  @click="onHeaderClick" icon="back">返回</mt-button>
+        </router-link>
+    </mt-header>
   </div>
 </template>
 
 <script>
-
+import { Toast } from 'mint-ui';
 export default {
   name: 'Profile',
   props: {
@@ -46,8 +21,11 @@ export default {
     }
   },
   methods: {
-        onHeaderClick: function() {
-          this.$toast('Hello world!')
+        onHeaderClick() {
+          Toast('Upload Complete');
+        },
+        handleClose(){
+
         }
       }
 }

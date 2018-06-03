@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Home from './components/Home.vue'
+import View from './components/View.vue'
 import About from './components/About.vue'
 import Hash from './components/Hash.vue'
 import Bip39 from './components/Bip39.vue'
@@ -10,30 +11,31 @@ import First from './components/First.vue'
 import Profile from './components/Profile.vue'
 
 import VueClipboard from 'vue-clipboard2'
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.min.css';
+
+import MuseUI from 'muse-ui';
+import css from 'muse-ui/dist/muse-ui.css';
+Vue.use(MuseUI);
+
+import MintUI from 'mint-ui'
 
 
-import WeVue from 'we-vue'
-import 'we-vue/lib/style.css'
-Vue.use(WeVue)
+Vue.use(MintUI)
 
-import { Icon } from 'we-vue'
-Vue.use(Icon)
+import VueResource from 'vue-resource';
+Vue.use(VueResource)
 
-Vue.use(Mint);
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
+Vue.http.options.emulateJSON = true
+Vue.http.options.xhr = { withCredentials: true }
+Vue.http.options.crossOrigin = true
+Vue.http.options.emulateHTTP
+
 const routes = [
   { path: '/', component: Home },
-  { path: '/about', component: About },
-  { path: '/hash', component: Hash },
-  { path: '/bip39', component: Bip39 },
-  { path: '/eth', component: Eth },
-  { path: '/first', component: First },
-  { path: '/profile', component: Profile }
+  { path: '/view/:id', component: View },
 ]
 
 const router = new VueRouter({

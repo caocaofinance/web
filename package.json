@@ -15,9 +15,12 @@
     "ethereumjs-wallet": "^0.6.0",
     "keccak": "^1.4.0",
     "mint-ui": "^2.2.13",
+    "muse-ui": "^3.0.0-beta.2",
     "secp256k1": "^3.5.0",
     "vue": "^2.5.16",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
+    "vue-source": "^1.1.1",
     "we-vue": "^2.1.2"
   },
   "devDependencies": {
